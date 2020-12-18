@@ -108,8 +108,14 @@ namespace ExcelDataReader
             return RowCells[i]?.Value;
         }
 
-        public int GetValues(object[] values) => throw new NotSupportedException();
-               
+        public int GetValues(object[] values)
+        {
+            for (int i = 0; i < FieldCount; i++)
+                values[i] = GetValue(i);
+
+            return FieldCount;
+        }
+
         public bool IsDBNull(int i) => GetValue(i) == null;
 
         public string GetNumberFormatString(int i)
